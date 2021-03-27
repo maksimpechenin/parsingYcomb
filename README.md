@@ -17,4 +17,4 @@ How to run?:
 
 If you r lazy:
 
-Look inside file in y.json in this repository 
+Look inside file y.json in this repository 
