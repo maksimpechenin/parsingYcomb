@@ -11,32 +11,30 @@ class yySpider(scrapy.Spider):
                    'S13', 'W13', 'S12', 'W12', 'S11', 'W11', 'S10', 'W10', 'S09', 'W09', 'S08', 'W08', 'S07', 'W07', 'S06', 'W06',
                    'S05']
         bodies=['{"requests":[{"indexName":"YCCompany_production","params":"hitsPerPage=1000&query=&page=0&facets=%5B%22top_company%22%2C%22isHiring%22%2C%22nonprofit%22%2C%22batch%22%2C%22industries%22%2C%22subindustry%22%2C%22status%22%2C%22regions%22%5D&tagFilters=&facetFilters=%5B%5B%22batch%3A'+season+'%22%5D%5D"},{"indexName":"YCCompany_production","params":"hitsPerPage=1&query=&page=0&attributesToRetrieve=%5B%5D&attributesToHighlight=%5B%5D&attributesToSnippet=%5B%5D&tagFilters=&analytics=false&clickAnalytics=false&facets=batch"}]}' for season in seasons]
-        for body in bodies: yield scrapy.Request(url = url, method = 'POST', body = body, callback = self.parse) ### из-за этого говная омгут быть ошибки
+        for body in bodies: yield scrapy.Request(url = url, method = 'POST', body = body, callback = self.parse) ### из-за этого говная могут быть ошибки
 
     def parse(self, response):
-            companies = json.loads(response.text)['results'][0]['hits']
-            with open('yy.json','a') as f:
-                for c in companies:
-                    json.dump({'name':c['name'],
-                               'moto':c['one_liner'],
-                               'batch':c['batch'],
-                               'description':c['description'],
-                               'former_names':c['former_names'],
-                               'id':c['id'],
-                               'industries':c['industries'],
-                               'industry':c['industry'],
-                               'isHiring':c['isHiring'],
-                               'location':c['location'],
-                               'nonprofit':c['nonprofit'],
-                               'objectID':c['objectID'],
-                               'regions':c['regions'],
-                               'small_logo_thumb_url':c['small_logo_thumb_url'],
-                               'status':c['status'],
-                               'subindustry':c['subindustry'],
-                               'tags':c['tags'],
-                               'team_size':c['team_size'],
-                               'top_company':c['top_company'],
-                               'website':c['website']},
-                              f,
-                              indent = 4)
+        companies = json.loads(response.text)['results'][0]['hits']
+        with open('yy.json','a') as f:
+            for c in companies:
+                json.dump({'name':c['name'],
+                           'moto':c['one_liner'],
+                           'batch':c['batch'],
+                           'description':c['description'],
+                           'former_names':c['former_names'],
+                           'id':c['id'],
+                           'industries':c['industries'],
+                           'industry':c['industry'],
+                           'isHiring':c['isHiring'],
+                           'location':c['location'],
+                           'nonprofit':c['nonprofit'],
+                           'objectID':c['objectID'],
+                           'regions':c['regions'],
+                           'small_logo_thumb_url':c['small_logo_thumb_url'],
+                           'status':c['status'],
+                           'subindustry':c['subindustry'],
+                           'tags':c['tags'],
+                           'team_size':c['team_size'],
+                           'top_company':c['top_company'],
+                           'website':c['website']}, f, indent = 4)
       
