@@ -3,8 +3,8 @@ from scrapy import Request
 import json,csv
 
 
-class yySpider(scrapy.Spider):
-    name = 'yy'
+class ySpider(scrapy.Spider):
+    name = 'y'
     def start_requests(self):
         url='https://45bwzj1sgc-3.algolianet.com/1/indexes/*/queries?x-algolia-agent=Algolia%20for%20JavaScript%20(3.35.1)%3B%20Browser%3B%20JS%20Helper%20(3.1.0)&x-algolia-application-id=45BWZJ1SGC&x-algolia-api-key=NDYzYmNmMTRjYzU4MDE0ZWY0MTVmMTNiYzcwYzMyODFlMjQxMWI5YmZkMjEwMDAxMzE0OTZhZGZkNDNkYWZjMHJlc3RyaWN0SW5kaWNlcz0lNUIlMjJZQ0NvbXBhbnlfcHJvZHVjdGlvbiUyMiU1RCZ0YWdGaWx0ZXJzPSU1QiUyMiUyMiU1RCZhbmFseXRpY3NUYWdzPSU1QiUyMnljZGMlMjIlNUQ%3D'
         seasons = ['W21', 'S20', 'W20', 'S19', 'W19', 'S18', 'W18', 'S17', 'W17', 'IK12', 'S16', 'W16', 'S15', 'W15', 'S14','W14',
@@ -15,7 +15,7 @@ class yySpider(scrapy.Spider):
 
     def parse(self, response):
         companies = json.loads(response.text)['results'][0]['hits']
-        with open('yy.json','a') as f:
+        with open('y.json','a') as f:
             for c in companies:
                 json.dump({'name':c['name'],
                            'moto':c['one_liner'],
