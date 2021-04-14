@@ -3,6 +3,7 @@ from scrapy import Request
 import json,csv
 
 
+
 class ySpider(scrapy.Spider):
     name = 'y'
     def start_requests(self):
@@ -12,7 +13,7 @@ class ySpider(scrapy.Spider):
                    'S05']
         bodies=['{"requests":[{"indexName":"YCCompany_production","params":"hitsPerPage=1000&query=&page=0&facets=%5B%22top_company%22%2C%22isHiring%22%2C%22nonprofit%22%2C%22batch%22%2C%22industries%22%2C%22subindustry%22%2C%22status%22%2C%22regions%22%5D&tagFilters=&facetFilters=%5B%5B%22batch%3A'+season+'%22%5D%5D"},{"indexName":"YCCompany_production","params":"hitsPerPage=1&query=&page=0&attributesToRetrieve=%5B%5D&attributesToHighlight=%5B%5D&attributesToSnippet=%5B%5D&tagFilters=&analytics=false&clickAnalytics=false&facets=batch"}]}' for season in seasons]
         for body in bodies:
-            yield scrapy.Request(url = url, method = 'POST', body = body, callback = self.parse) 
+            yield scrapy.Request(url = url, method = 'POST', body = body, callback = self.parse)
 
     def parse(self, response):
         companies = json.loads(response.text)['results'][0]['hits']
