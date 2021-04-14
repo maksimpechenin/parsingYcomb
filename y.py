@@ -2,8 +2,6 @@ import scrapy
 from scrapy import Request
 import json,csv
 
-
-
 class ySpider(scrapy.Spider):
     name = 'y'
     def start_requests(self):
